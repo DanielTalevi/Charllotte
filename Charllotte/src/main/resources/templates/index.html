@@ -68,10 +68,15 @@
 
 <script>
     let cliques = 0;
-    function incrementar() {
-        cliques++;
-        document.getElementById('contador').textContent = 'Cliques: ' + cliques;
+
+function incrementar() {
+    cliques++;
+    document.getElementById('contador').textContent = 'Cliques: ' + cliques;
+    
+    if (cliques === 100) {
+        document.getElementById('contador').textContent += ' — Você não tem nada melhor pra fazer?';
     }
+}
 </script>
 </body>
 </html>
