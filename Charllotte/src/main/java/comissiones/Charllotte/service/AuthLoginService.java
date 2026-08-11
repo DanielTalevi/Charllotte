@@ -1,16 +1,32 @@
 package comissiones.Charllotte.service;
 
-import java.util.List;
+import comissiones.Charllotte.model.Usuario;
+import comissiones.Charllotte.repository.UsuarioRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
-import java.util.function.Function;
+import java.util.Scanner;
 
-import  comissiones.Charllotte.model.Usuario;
-import  comissiones.Charllotte.repository.UsuarioRepository;
-
+@Service
 public class AuthLoginService {
-    Usuario usuario = new Usuario();
 
+    private final UsuarioRepository usuarioRepository;
 
+    public AuthLoginService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
+    public boolean authLogin(String email, String senha) {
 
+        Optional<Usuario> resultado =
+                usuarioRepository.findByEmail(email);
+
+        if (resultado.isEmpty()) {
+            return false;
+        }
+
+        Usuario usuario = resultado.get();
+
+        return usuario.getPassword().equals(senha);
+    }
 }
